@@ -11,6 +11,10 @@ namespace MovieWebApi.Data.Contexts
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
+        public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()
