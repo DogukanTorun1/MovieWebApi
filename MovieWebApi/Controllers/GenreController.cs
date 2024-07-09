@@ -40,5 +40,69 @@ namespace MovieWebApi.Controllers
             }
 
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetGenre(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Genre genre = _db.Genres.Find(id);
+                if (genre == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(new GenreDto
+                    {
+                        GenreId = genre.Id,
+                        GenreName = genre.Name
+                    });
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddGenre([FromBody] GenreDto genreDto)
+        {
+            if (ModelState.IsValid)
+            {
+                Genre genre = new Genre
+                {
+                    Name = genreDto.GenreName
+                };
+                _db.Genres.Add(genre);
+                _db.SaveChanges();
+                return Ok(genre);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteGenre(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Genre genre = _db.Genres.Find(id);
+                if (genre == null)
+                {
+                    return NotFound();
+                }
+                _db.Genres.Remove(genre);
+                _db.SaveChanges();
+                return Ok("Genre Deleted!");
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
     }
 }
