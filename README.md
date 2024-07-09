@@ -23,7 +23,7 @@ Database is created using entity framework core code first approach. The project
 
 1. Clone the repository
 ```bash
-git clone adress
+git clone https://github.com/DogukanTorun1/MovieWebApi.git
 ```
 2. Open the project in Visual Studio 2022			
 3. Open the Package Manager Console
